@@ -16,7 +16,7 @@ public class Owner {
     private int id;
 
     private String name;
-    @OneToMany(mappedBy = "owner", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "owner", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Car> cars = new ArrayList<>();
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
