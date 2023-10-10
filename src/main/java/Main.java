@@ -1,3 +1,7 @@
+import enums.Type;
+import models.Car;
+import models.DriveLicense;
+import models.Owner;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -14,7 +18,9 @@ public class Main {
                 .configure("hibernate.cfg.xml")
                 .build();
         Metadata metadata = new MetadataSources(serviceRegistry)
-                .addAnnotatedClass()
+                .addAnnotatedClass(Car.class)
+                .addAnnotatedClass(DriveLicense.class)
+                .addAnnotatedClass(Owner.class)
                 .getMetadataBuilder()
                 .build();
 
@@ -23,7 +29,14 @@ public class Main {
                 Session session = sessionFactory.openSession();
         ) {
             Transaction transaction = session.beginTransaction();
-
+//            Owner owner = new Owner("KIRA", new DriveLicense("B"));
+//            session.save(owner);
+//            Owner owner = session.find(Owner.class, 1);
+//            Car car = new Car("AUDI", Type.HATCHBACK, 200, 15000, 2010, owner);
+//            session.save(car);
+//            System.out.println(owner);
+            Car car = session.find(Car.class, 2);
+            System.out.println(car.getOwner());
             transaction.commit();
         }
 
